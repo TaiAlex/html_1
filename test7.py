@@ -476,7 +476,7 @@ class SplitWavAudioMubin():
             cau_hoi5 += ' ' + ghep
         for ghep in list_cau6:
             cau_hoi6 += ' ' + ghep
-        with open(r"E:\04-02-2023\folder1\log.txt",'w', encoding='utf-8', errors='ignore') as f:
+        with open(r"./log.txt",'w', encoding='utf-8', errors='ignore') as f:
                 f.write(" %s\n " %cau_hoi1)
                 f.write("%s\n " %cau_hoi2)  
                 f.write("%s\n " %cau_hoi3)  
@@ -490,7 +490,7 @@ class SplitWavAudioMubin():
             else:
                 ketqua.append('False')       
         df = pd.DataFrame(zip(list_1,dapan,ketqua), index =['Câu 1', 'Câu 2', 'Câu 3', 'Câu 4', 'Câu 5', 'Câu 6'],columns =['CÂU TRẢ LỜI','ĐÁP ÁN','KẾT QUẢ'])
-        with open('df.json', 'w', encoding='utf-8') as file:
+        with open('./df.json', 'w', encoding='utf-8') as file:
             df.to_json(file, force_ascii=False)
         print("Đây là kết quả:.........")
         print("Câu trả lời: ", list_1)
