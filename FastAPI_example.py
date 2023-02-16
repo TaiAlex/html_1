@@ -2,7 +2,6 @@ from fastapi import File, UploadFile, Request, FastAPI
 from fastapi.templating import Jinja2Templates
 import str_time
 import os
-# from test7 import SplitWavAudioMubin as SWAM
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -10,7 +9,6 @@ templates = Jinja2Templates(directory="templates")
 time = str_time.now_utc()
 dir_name = str_time.str_yyyy_mm_dd(time)
 file_name = str_time.get_time()
-text = r""
 
 @app.post("/upload")
 def upload(file: UploadFile = File(...)):
@@ -27,6 +25,7 @@ def upload(file: UploadFile = File(...)):
         # print('target_path_1: ', text_path)
         # print(file_path)
         file_bytes = file.file.read()
+        # print(file_bytes)
         str_time.upload_file_bytes(file_bytes, file_path)
     except Exception:
         return {"message": "There was an error uploading the file"}
@@ -36,31 +35,10 @@ def upload(file: UploadFile = File(...)):
 
 @app.get("/to_text")
 def display_text():
-    with open('test1.txt', 'r') as alex:
+    with open('log.txt', 'r', encoding='UTF-8') as alex:
         t = alex.read()
     return {'Hello': t}
 
 @app.get("/")
 def main(request: Request):
     return templates.TemplateResponse("template.html", {"request": request})
-
-
-# from fastapi import FastAPI, UploadFile, File
-
-# app = FastAPI()
-
-
-# @app.post('/read_txt_file')
-# async def upload_file_and_read(file: UploadFile = File(...),):
-#     if file.content_type.startswith("text"):
-#         text_binary = await readTxt(file) # call `await`
-#         response = text_binary.decode()
-#     else:
-#         # do something
-#         response = file.filename
-
-#     return response
-
-
-# def readTxt(file):
-#     return file.read()
