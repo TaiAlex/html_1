@@ -89,14 +89,16 @@ dst = r"E:\04-02-2023\folder1\ulatroi.wav"
 # sound.export(dst, format="wav")
 
 import os
+import pydub
+import glob
 
-target_path_1 = os.path.join(os.path.dirname(__file__), 'log.txt')
+# target_path_1 = os.path.join(os.path.dirname(__file__), 'log.txt')
 
-print('target_path_1: ', target_path_1)
+# print('target_path_1: ', target_path_1)
 
-print('read target file:')
-with open(target_path_1, encoding='UTF-8') as f:
-    print(f.read())
+# print('read target file:')
+# with open(target_path_1, encoding='UTF-8') as f:
+#     print(f.read())
 
 def find_path():
     folder_path = r'E:\16-02-2023\folder_test\text\*'
@@ -106,6 +108,8 @@ def find_path():
     the_last_file = max(files, key=os.path.getctime)
     print(the_last_file)
     return the_last_file
+
+mp3_to_wav(find_path())
 
 def mp3_to_wav(file_path):
     type = file_path.split('.')[1]
