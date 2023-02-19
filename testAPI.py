@@ -101,10 +101,11 @@ import glob
 #     print(f.read())
 
 def find_path():
-    folder_path = r'E:\16-02-2023\folder_test\text\*'
+#     folder_path = r'E:\16-02-2023\folder_test\text\*'
+    folder_path = r'/home/ubuntu/html_1*'
     sub_folders = glob.glob(folder_path)
     the_lastest_subfolder = max(sub_folders, key=os.path.getctime)
-    files = glob.glob(the_lastest_subfolder + '\*')
+    files = glob.glob(the_lastest_subfolder + '/*')
     the_last_file = max(files, key=os.path.getctime)
     print(the_last_file)
     return the_last_file
@@ -142,3 +143,5 @@ def split_list_answer():
         col_answer.append(answer.upper())
     col_answer.pop(0)
     print(col_answer)           
+
+mp3_to_wav(find_path())
