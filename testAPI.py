@@ -98,3 +98,43 @@ print('read target file:')
 with open(target_path_1, encoding='UTF-8') as f:
     print(f.read())
 
+def find_path():
+    folder_path = r'E:\16-02-2023\folder_test\text\*'
+    sub_folders = glob.glob(folder_path)
+    the_lastest_subfolder = max(sub_folders, key=os.path.getctime)
+    files = glob.glob(the_lastest_subfolder + '\*')
+    the_last_file = max(files, key=os.path.getctime)
+    print(the_last_file)
+    return the_last_file
+
+def mp3_to_wav(file_path):
+    type = file_path.split('.')[1]
+    if type == 'mp3':
+        mp3_path = file_path
+        wav_path = file_path.split('.')[0] + '.wav'
+        sound = pydub.AudioSegment.from_mp3(mp3_path)
+        sound.export(wav_path, format="wav")
+        print(wav_path)
+        return wav_path
+    elif type == 'wav':
+        return file_path
+    else:
+        return False
+  
+def wav_to_txt(wav):
+    r = sr.Recognizer()
+    with sr.AudioFile(wav) as source:
+        audio = r.record(source)
+        text = r.recognize_google(audio, language = "vi-VI")
+        with open('log.txt', mode = 'a', encoding = 'UTF-8', errors = 'ignore') as data:
+            data.write(str(text))
+
+def split_list_answer():
+    col_answer = []
+    with open("log.txt","r", encoding="UTF-8") as f:
+        ot = f.read()       #original text
+    for j in ot.split('bắt đầu'):
+        answer = j.split('thời')[0].strip()[-1]
+        col_answer.append(answer.upper())
+    col_answer.pop(0)
+    print(col_answer)           
